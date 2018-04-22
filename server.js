@@ -38,8 +38,9 @@ app.use(bodyParser.json())
 app.use(function (req, res) {
   res.setHeader('Content-Type', 'text/plain')
   res.write('you posted:\n');
-  const regexp = /(([^\)]+))/;
-  res.end(JSON.stringify(req.headers['user-agent'], null, 2))
+  const regexp = /\(([^()]+)\)/;
+  ip = ip.substr(7)
+  res.end(JSON.stringify({os: req.headers['user-agent'].match(regexp)[1], ip: req.ipsubstr(0, 7) == "::ffff:" ? }, null, 2))
 })
 
 
