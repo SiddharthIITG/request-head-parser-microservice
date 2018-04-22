@@ -13,7 +13,7 @@ const ejs = require('ejs');
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.urlencoded({ extended: false }));
  
 // parse application/json
 app.use(bodyParser.json());
@@ -23,8 +23,10 @@ app.set('view engine', 'ejs');
 app.set('json spaces', 2);
 
 // http://expressjs.com/en/starter/basic-routing.html
-app.get("/", function (req, res) {
-  res.send(req);
+app.use("/", function (req, res) {
+  // res.setHeader("Content-Type", "application/json");
+  res.send(req.body);
+  next
   // res.render('index');
 });
 
