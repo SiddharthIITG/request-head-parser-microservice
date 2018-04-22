@@ -13,24 +13,18 @@ const ejs = require('ejs');
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
  
 // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
  
-app.use(function (req, res) {
-  res.setHeader('Content-Type', 'text/plain')
-  res.write('you posted:\n')
-  res.end(JSON.stringify(req.body, null, 2))
-})
-
 app.set('views', './src/views/');
 app.set('view engine', 'ejs');
 app.set('json spaces', 2);
 
 // http://expressjs.com/en/starter/basic-routing.html
 app.get("/", function (req, res) {
-  res.send(req.body);
+  res.send(req);
   // res.render('index');
 });
 
