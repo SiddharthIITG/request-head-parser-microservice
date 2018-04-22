@@ -16,19 +16,31 @@ app.use(express.static('public'));
 // app.use(bodyParser.urlencoded({ extended: false }));
  
 // parse application/json
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
  
-app.set('views', './src/views/');
-app.set('view engine', 'ejs');
-app.set('json spaces', 2);
+// app.set('views', './src/views/');
+// app.set('view engine', 'ejs');
+// app.set('json spaces', 2);
 
-// http://expressjs.com/en/starter/basic-routing.html
-app.use("/", function (req, res) {
-  // res.setHeader("Content-Type", "application/json");
-  res.send(req.body);
-  next
-  // res.render('index');
-});
+// // http://expressjs.com/en/starter/basic-routing.html
+// app.use("/", function (req, res, next) {
+//   // res.setHeader("Content-Type", "application/json");
+//   res.send(req.body);
+//   next();
+//   // res.render('index');
+// });
+
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
+
+app.use(function (req, res) {
+  res.setHeader('Content-Type', 'text/plain')
+  res.write('you posted:\n')
+  res.end(JSON.stringify(req.body, null, 2))
+})
+
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
