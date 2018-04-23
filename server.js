@@ -33,6 +33,7 @@ app.use(function (req, res) {
      req.connection.socket.remoteAddress).split(",")[0];
   if(ip.substr(0,7) == "::ffff:")
     ip = ip.substr(7);
+  var lang = req.headers['accept-language'].substr(0, req.headers['accept=-language'].indexOf(','));
   res.end(JSON.stringify({os: req.headers['user-agent'].match(regexp)[1], ip: ip, lang: req.headers["accept-language"]}, null, 2))
 })
 
